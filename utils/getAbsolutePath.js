@@ -5,7 +5,7 @@ module.exports = function getAbsolutePath(path) {
     return normalize(path);
   }
 
-  const currentDirectory = dirname(process.argv[1]);
+  const currentDirectory = process.cwd();
   const absolutePath = resolve(currentDirectory, path);
   return absolutePath;
 };
