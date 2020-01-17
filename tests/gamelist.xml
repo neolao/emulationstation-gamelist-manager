@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gameList>
+  <game>
+    <path>./DonkeyKongClassic (Shiru).smc</path>
+    <name>Classic Kong</name>
+    <desc>What&apos;s more fun than a barrel of monkeys? A Donkey Kong double feature! In DONKEY KONG you&apos;ll duck barrel bombs and flaming fireballs as y
+ou help Mario save his girlfriend Pauline from the clutches of Donkey Kong. In DONKEY KONG JR., you&apos;ll join forces with these madcap monkeys to help Donk
+ey Kong Jr. rescue his father from Mario&apos;s prison. Are you ready for laughter? You&apos;d better be. Because this double dose of monkey business will hav
+e you rolling in the aisles!</desc>
+    <image>./media/images/DonkeyKongClassic (Shiru).png</image>
+    <releasedate>20120101T000000</releasedate>
+    <developer>Shiru</developer>
+    <publisher>BubbleZap Games</publisher>
+    <genre>Action</genre>
+    <players>2</players>
+  </game>
+  <game>
+    <path>./Super Mario Kart (Europe).sfc</path>
+    <lastplayed>20200108T180418</lastplayed>
+    <playcount>2</playcount>
+    <genre>Course vue 3eme pers.</genre>
+    <publisher>Nintendo</publisher>
+    <developer>Nintendo</developer>
+    <releasedate>19920901T000000</releasedate>
+    <image>./media/images/Super Mario Kart (Europe).png</image>
+    <desc>Super Mario Kart sur Super Nintendo est un jeu de courses reprenant l&apos;univers et les personnages de Mario. Après avoir choisi un pilote parmi
+les huit proposés, lancez-vous dans les quatre coupes différentes pour essayer d&apos;atteindre la plus haute marche du podium. Grâce à des bonus ramassé
+s sur le circuit, tous les coups sont permis, à commencer par le largage de peaux de banane et l&apos;envoi de carapaces. Le mode Battle permet d&apos;ailleu
+rs d&apos;affronter les autres à coup de carapaces.</desc>
+    <favorite>true</favorite>
+    <rating>0.800000012</rating>
+    <name>Super Mario Kart</name>
+  </game>
+</gameList>
