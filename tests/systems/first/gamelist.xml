@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gameList>
+  <game>
+    <path>./a.ext</path>
+    <name>A</name>
+    <desc>Description A</desc>
+    <image>./media/images/a.png</image>
+    <releasedate>20000101T000000</releasedate>
+    <developer>Developer A</developer>
+    <publisher>Publisher A</publisher>
+    <genre>Action</genre>
+    <players>2</players>
+    <lastplayed>20200108T180418</lastplayed>
+    <rating>0.800000012</rating>
+    <favorite>true</favorite>
+  </game>
+  <game>
+    <path>./b.ext</path>
+    <name>B</name>
+    <desc>Description B</desc>
+    <image>./media/images/b.png</image>
+    <releasedate>20000101T000000</releasedate>
+    <developer>Developer B</developer>
+    <publisher>Publisher B</publisher>
+    <genre>Action</genre>
+    <players>2</players>
+    <lastplayed>20200108T180418</lastplayed>
+    <rating>0.800000012</rating>
+    <favorite>true</favorite>
+  </game>
+  <game>
+    <path>./c.ext</path>
+    <name>C</name>
+    <desc>Description C</desc>
+    <image>./media/images/c.png</image>
+    <releasedate>20000101T000000</releasedate>
+    <developer>Developer C</developer>
+    <publisher>Publisher C</publisher>
+    <genre>Action</genre>
+    <players>2</players>
+    <lastplayed>20200108T180418</lastplayed>
+    <rating>0.800000012</rating>
+    <favorite>true</favorite>
+  </game>
+  <game>
+    <path>./d.ext</path>
+    <name>D</name>
+    <desc>Description D</desc>
+    <image>./media/images/d.png</image>
+    <releasedate>20000101T000000</releasedate>
+    <developer>Developer D</developer>
+    <publisher>Publisher D</publisher>
+    <genre>Action</genre>
+    <players>2</players>
+    <lastplayed>20200108T180418</lastplayed>
+    <rating>0.800000012</rating>
+    <favorite>true</favorite>
+  </game>
+  <game>
+    <path>./e.ext</path>
+    <name>E</name>
+    <desc>Description E</desc>
+    <image>./media/images/e.png</image>
+    <releasedate>20000101T000000</releasedate>
+    <developer>Developer E</developer>
+    <publisher>Publisher E</publisher>
+    <genre>Action</genre>
+    <players>2</players>
+    <lastplayed>20200108T180418</lastplayed>
+    <rating>0.800000012</rating>
+    <favorite>true</favorite>
+  </game>
+</gameList>
