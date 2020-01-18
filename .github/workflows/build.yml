@@ -1,0 +1,20 @@
+name: Build
+
+on: [push]
+
+jobs:
+  armv7_job:
+    runs-on: ubuntu-18.04
+    name: Build on ARMv7 
+    steps:
+      - uses: actions/checkout@v1.0.0
+      - uses: uraimo/run-on-arch-action@v1.0.5
+        with:
+          architecture: armv7
+          distribution: buster
+          run: |
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+            export NVM_DIR="$HOME/.nvm"
+            . "$NVM_DIR/nvm.sh"
+            nvm install 12.2.0
+            npm run build-linux-armv7
