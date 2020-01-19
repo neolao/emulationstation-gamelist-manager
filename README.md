@@ -5,7 +5,7 @@ Download on Recalbox
 --------------------
 
 ```bash
-wget https://github.com/neolao/emulationstation-gamelist-manager/releases/download/latest/egm-linux-armv7 -O egm
+wget https://github.com/neolao/emulationstation-gamelist-manager/releases/latest/download/egm-linux-armv7 -O egm
 chmod +x egm
 ```
 
