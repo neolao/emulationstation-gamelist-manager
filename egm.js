@@ -1,8 +1,9 @@
+#!/usr/bin/env node
+
 const program = require("commander");
 const info = require("./package.json");
 const check = require("./commands/check");
-const extract = require("./commands/extract");
-const removeGamesNotFound = require("./commands/removeGamesNotFound");
+const deleteGamesNotFound = require("./commands/deleteGamesNotFound");
 
 program.version(info.version);
 program
@@ -10,13 +11,13 @@ program
   .description("Check gamelist")
   .action(check);
 program
-  .command("extract <gamelist-file-path> [destination-path]")
-  .description("Extract gamelist informations")
-  .action(extract);
-program
-  .command("removeGamesNotFound <gamelist-file-path>")
-  .description("Remove games not found in gamelist")
-  .action(removeGamesNotFound);
+  .command("deleteGamesNotFound <gamelist-file-path>")
+  .description("Delete games not found in gamelist")
+  .action(deleteGamesNotFound);
+program.on("command:*", () => {
+  console.error("Invalid command: %s\nSee --help for a list of available commands.", program.args.join(" "));
+  process.exit(1);
+});
 program.parse(process.argv);
 
 const noCommandSpecified = process.argv.length <= 2;

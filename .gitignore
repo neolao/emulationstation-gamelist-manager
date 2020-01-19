@@ -1,2 +1,4 @@
 node_modules
 egm
+*.tmp.xml
+.eslintcache

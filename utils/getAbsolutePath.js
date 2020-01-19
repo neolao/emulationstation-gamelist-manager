@@ -1,4 +1,4 @@
-const { isAbsolute, dirname, resolve, normalize } = require("path");
+const { isAbsolute, resolve, normalize } = require("path");
 
 module.exports = function getAbsolutePath(path) {
   if (isAbsolute(path)) {

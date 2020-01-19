@@ -1,4 +1,3 @@
-const { readFile } = require("fs").promises;
 const { dirname } = require("path");
 const getAbsolutePath = require("./getAbsolutePath");
 

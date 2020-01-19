@@ -16,7 +16,8 @@ module.exports = async function loadGamelist(filePath) {
       if (Array.isArray(game[key]) && game[key].length === 0) {
         normalized[key] = undefined;
       } else if (Array.isArray(game[key]) && game[key].length === 1) {
-        normalized[key] = game[key][0];
+        const [value] = game[key];
+        normalized[key] = value;
       } else {
         normalized[key] = game[key];
       }
