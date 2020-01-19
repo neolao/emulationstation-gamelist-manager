@@ -3,23 +3,44 @@ name: Build
 on: [push]
 
 jobs:
-  armv7:
+  check-version:
+    name: Check package.json version
     runs-on: ubuntu-18.04
-    name: Build on ARMv7
     steps:
-      - name: Check package.json version
-        uses: MontyD/package-json-updated-action@1.0.0
+      - uses: MontyD/package-json-updated-action@1.0.0
         id: version-updated
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Checkout
-        uses: actions/checkout@v1.0.0
-        if: steps.version-updated.outputs.has-updated
+  checkout:
+    name: Checkout
+    if: steps.version-updated.outputs.has-updated
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v1.0.0
 
+  release:
+    name: Create release
+    if: steps.version-updated.outputs.has-updated
+    runs-on: ubuntu-18.04
+    steps:
+      - id: create-release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.version-updated.outputs.current-package-version }}
+          release_name: Release ${{ steps.version-updated.outputs.current-package-version }}
+          draft: false
+          prerelease: false
+
+  linux-armv7:
+    name: Build on Linux ARMv7
+    if: steps.version-updated.outputs.has-updated
+    runs-on: ubuntu-18.04
+    steps:
       - name: Build
         uses: uraimo/run-on-arch-action@v1.0.5
-        if: steps.version-updated.outputs.has-updated
         with:
           architecture: armv7
           distribution: buster
@@ -34,25 +55,40 @@ jobs:
             ./egm
             npm test
 
-      - name: Create release
-        id: create-release
-        uses: actions/create-release@v1
-        if: steps.version-updated.outputs.has-updated
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.version-updated.outputs.current-package-version }}
-          release_name: Release ${{ steps.version-updated.outputs.current-package-version }}
-          draft: false
-          prerelease: false
-
       - name: Upload binary
         uses: actions/upload-release-asset@v1.0.1
-        if: steps.version-updated.outputs.has-updated
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create-release.outputs.upload_url }}
           asset_path: ./egm
           asset_name: egm-linux-armv7
+          asset_content_type: application/x-executable; charset=binary
+
+  linux-x64:
+    name: Build on Linux x64
+    if: steps.version-updated.outputs.has-updated
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Build
+        run: |
+          run: |
+            apt-get update && apt-get install -y wget
+            wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+            export NVM_DIR="$HOME/.nvm"
+            . "$NVM_DIR/nvm.sh"
+            nvm install 12.2.0
+            npm ci
+            npm run build-linux-x64
+            ./egm
+            npm test
+
+      - name: Upload binary
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: ./egm
+          asset_name: egm-linux-x64
           asset_content_type: application/x-executable; charset=binary
