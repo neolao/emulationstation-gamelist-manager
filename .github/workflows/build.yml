@@ -3,12 +3,23 @@ name: Build
 on: [push]
 
 jobs:
-  armv7_job:
+  armv7:
     runs-on: ubuntu-18.04
-    name: Build on ARMv7 
+    name: Build on ARMv7
     steps:
-      - uses: actions/checkout@v1.0.0
-      - uses: uraimo/run-on-arch-action@v1.0.5
+      - name: Check package.json version
+        uses: MontyD/package-json-updated-action
+        id: version-updated
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout
+        uses: actions/checkout@v1.0.0
+        if: steps.version-updated.outputs.has-updated
+
+      - name: Build
+        uses: uraimo/run-on-arch-action@v1.0.5
+        if: steps.version-updated.outputs.has-updated
         with:
           architecture: armv7
           distribution: buster
@@ -22,3 +33,24 @@ jobs:
             npm run build-linux-armv7
             ./egm
             npm test
+
+      - name: Create release
+        id: create-release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ step.version-updated.outputs.current-package-version }}
+          release_name: Release ${{ step.version-updated.outputs.current-package-version }}
+          draft: false
+          prerelease: false
+
+      - name: Upload binary
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: ./egm
+          asset_name: egm-linux-armv7
+          asset_content_type: application/x-executable; charset=binary
