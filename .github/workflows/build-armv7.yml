@@ -1,6 +1,8 @@
 name: Build ARMv7
 
-on: [release]
+on:
+  release:
+    types: [created]
 
 jobs:
   build:
