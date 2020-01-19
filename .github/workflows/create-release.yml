@@ -12,17 +12,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create release
+      - name: Checkout
+        uses: actions/checkout@v1.0.0
         if: steps.version-updated.outputs.has-updated
-        id: create-release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.version-updated.outputs.current-package-version }}
-          release_name: Release ${{ steps.version-updated.outputs.current-package-version }}
-          draft: false
-          prerelease: false
 
       - name: Build on Linux ARMv7
         if: steps.version-updated.outputs.has-updated
@@ -40,6 +32,18 @@ jobs:
             npm run build-linux-armv7
             ./egm
             npm test
+
+      - name: Create release
+        if: steps.version-updated.outputs.has-updated
+        id: create-release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.version-updated.outputs.current-package-version }}
+          release_name: Release ${{ steps.version-updated.outputs.current-package-version }}
+          draft: false
+          prerelease: false
 
       - name: Upload Linux ARMv7
         if: steps.version-updated.outputs.has-updated

@@ -1,7 +1,7 @@
 {
   "name": "emulationstation-gamelist-manager",
   "description": "Emulationstation Gamelist Manager",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "author": "neolao <contact@neolao.com>",
   "repository": "https://github.com/neolao/emulationstation-gamelist-manager.git",
   "license": "MIT",
