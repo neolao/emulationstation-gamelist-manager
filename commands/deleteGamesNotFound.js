@@ -5,7 +5,7 @@ const getGamelistDirectoryPath = require("../utils/getGamelistDirectoryPath");
 const filterFoundGamesInDirectory = require("../utils/filterFoundGamesInDirectory");
 
 module.exports = async function deleteGamesNotFound(gamelistPath) {
-  const absoluteGamelistPath = getAbsolutePath(gamelistPath);
+  const absoluteGamelistPath = getAbsolutePath(gamelistPath, process.cwd());
   const games = await loadGamelist(gamelistPath);
   const directoryPath = getGamelistDirectoryPath(gamelistPath);
   const foundGames = await filterFoundGamesInDirectory(games, directoryPath);
