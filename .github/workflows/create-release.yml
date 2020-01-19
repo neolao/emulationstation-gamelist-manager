@@ -1,6 +1,10 @@
 name: Create release
 
-on: [push]
+on:
+  push:
+    max-parallel: 1
+    branches:
+      - master
 
 jobs:
   create:
