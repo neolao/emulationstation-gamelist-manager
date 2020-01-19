@@ -8,7 +8,7 @@ jobs:
     name: Build on ARMv7
     steps:
       - name: Check package.json version
-        uses: MontyD/package-json-updated-action
+        uses: MontyD/package-json-updated-action@v1.0.0
         id: version-updated
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
