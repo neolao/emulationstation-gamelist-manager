@@ -3,7 +3,7 @@ const xml2js = require("xml2js");
 const getAbsolutePath = require("./getAbsolutePath");
 
 module.exports = async function loadGamelist(filePath) {
-  const absoluteFilePath = getAbsolutePath(filePath);
+  const absoluteFilePath = getAbsolutePath(filePath, process.cwd());
   const parser = new xml2js.Parser();
   const xml = await readFile(absoluteFilePath);
   const data = await parser.parseStringPromise(xml);

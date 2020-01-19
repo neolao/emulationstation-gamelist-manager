@@ -13,4 +13,14 @@ describe("check", () => {
     const { stdout } = await execFile("node", [egm, "check", `${__dirname}/systems/first/gamelist.xml`]);
     expect(stdout).toContain("Not found: 2");
   });
+
+  it("should display the number of missing images", async () => {
+    const { stdout } = await execFile("node", [egm, "check", `${__dirname}/systems/first/gamelist.xml`]);
+    expect(stdout).toContain("Missing images: 2");
+  });
+
+  it("should display the number of missing videos", async () => {
+    const { stdout } = await execFile("node", [egm, "check", `${__dirname}/systems/first/gamelist.xml`]);
+    expect(stdout).toContain("Missing videos: 2");
+  });
 });

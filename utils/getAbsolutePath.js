@@ -1,11 +1,9 @@
 const { isAbsolute, resolve, normalize } = require("path");
 
-module.exports = function getAbsolutePath(path) {
+module.exports = function getAbsolutePath(path, directoryPath) {
   if (isAbsolute(path)) {
     return normalize(path);
   }
 
-  const currentDirectory = process.cwd();
-  const absolutePath = resolve(currentDirectory, path);
-  return absolutePath;
+  return resolve(directoryPath, path);
 };

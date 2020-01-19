@@ -19,6 +19,8 @@ Commands
 ```
 Number of games: 42
 Not found: 3
+Missing images: 2
+Missing videos: 1
 ```
 
 ### Delete games not found

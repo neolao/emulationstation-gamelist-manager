@@ -18,7 +18,7 @@
     <path>./b.ext</path>
     <name>B</name>
     <desc>Description B</desc>
-    <image>./media/images/b.png</image>
+    <video>./media/videos/b.mp4</video>
     <releasedate>20000101T000000</releasedate>
     <developer>Developer B</developer>
     <publisher>Publisher B</publisher>
