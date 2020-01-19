@@ -1,33 +1,20 @@
-name: Build
+name: Create release
 
 on: [push]
 
 jobs:
-  check-version:
-    name: Check package.json version
+  build:
     runs-on: ubuntu-18.04
     steps:
-      - uses: MontyD/package-json-updated-action@1.0.0
+      - name: Check package.json version
+        uses: MontyD/package-json-updated-action@1.0.0
         id: version-updated
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: |
-          echo "::set-env name=HAS_UPDATED::$(steps.version-updated.outputs.has-updated)"
 
-  checkout:
-    name: Checkout
-    needs: check-version
-    if: env.HAS_UPDATED
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v1.0.0
-
-  release:
-    name: Create release
-    needs: checkout
-    runs-on: ubuntu-18.04
-    steps:
-      - id: create-release
+      - name: Create release
+        if: steps.version-updated.outputs.has-updated
+        id: create-release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -37,12 +24,8 @@ jobs:
           draft: false
           prerelease: false
 
-  linux-armv7:
-    name: Build on Linux ARMv7
-    needs: release
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Build
+      - name: Build on Linux ARMv7
+        if: steps.version-updated.outputs.has-updated
         uses: uraimo/run-on-arch-action@v1.0.5
         with:
           architecture: armv7
@@ -58,7 +41,8 @@ jobs:
             ./egm
             npm test
 
-      - name: Upload binary
+      - name: Upload Linux ARMv7
+        if: steps.version-updated.outputs.has-updated
         uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -68,12 +52,8 @@ jobs:
           asset_name: egm-linux-armv7
           asset_content_type: application/x-executable; charset=binary
 
-  linux-x64:
-    name: Build on Linux x64
-    needs: release
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Build
+      - name: Build on Linux x64
+        if: steps.version-updated.outputs.has-updated
         run: |
           run: |
             apt-get update && apt-get install -y wget
@@ -86,7 +66,8 @@ jobs:
             ./egm
             npm test
 
-      - name: Upload binary
+      - name: Upload Linux x64
+        if: steps.version-updated.outputs.has-updated
         uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -95,3 +76,4 @@ jobs:
           asset_path: ./egm
           asset_name: egm-linux-x64
           asset_content_type: application/x-executable; charset=binary
+
