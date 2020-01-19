@@ -1,4 +1,4 @@
-name: Build ARMv7
+name: Build Linux ARMv7
 
 on:
   release:
@@ -11,7 +11,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1.0.0
 
-      - uses: uraimo/run-on-arch-action@v1.0.5
+      - name: Build
+        uses: uraimo/run-on-arch-action@v1.0.5
         with:
           architecture: armv7
           distribution: buster
@@ -23,10 +24,9 @@ jobs:
             nvm install 12.2.0
             npm ci
             npm run build-linux-armv7
-            ./egm
             npm test
 
-      - name: Upload Linux ARMv7
+      - name: Upload
         uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
