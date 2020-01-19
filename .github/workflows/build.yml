@@ -37,16 +37,18 @@ jobs:
       - name: Create release
         id: create-release
         uses: actions/create-release@v1
+        if: steps.version-updated.outputs.has-updated
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ step.version-updated.outputs.current-package-version }}
-          release_name: Release ${{ step.version-updated.outputs.current-package-version }}
+          tag_name: ${{ steps.version-updated.outputs.current-package-version }}
+          release_name: Release ${{ steps.version-updated.outputs.current-package-version }}
           draft: false
           prerelease: false
 
       - name: Upload binary
         uses: actions/upload-release-asset@v1.0.1
+        if: steps.version-updated.outputs.has-updated
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
