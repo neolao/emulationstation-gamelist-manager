@@ -11,17 +11,20 @@ jobs:
         id: version-updated
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: |
+          echo "::set-env name=HAS_UPDATED::$(steps.version-updated.outputs.has-updated)"
 
   checkout:
     name: Checkout
-    if: steps.version-updated.outputs.has-updated
+    needs: check-version
+    if: env.HAS_UPDATED
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v1.0.0
 
   release:
     name: Create release
-    if: steps.version-updated.outputs.has-updated
+    needs: checkout
     runs-on: ubuntu-18.04
     steps:
       - id: create-release
@@ -36,7 +39,7 @@ jobs:
 
   linux-armv7:
     name: Build on Linux ARMv7
-    if: steps.version-updated.outputs.has-updated
+    needs: release
     runs-on: ubuntu-18.04
     steps:
       - name: Build
@@ -67,7 +70,7 @@ jobs:
 
   linux-x64:
     name: Build on Linux x64
-    if: steps.version-updated.outputs.has-updated
+    needs: release
     runs-on: ubuntu-18.04
     steps:
       - name: Build
