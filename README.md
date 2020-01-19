@@ -20,3 +20,11 @@ Commands
 Number of games: 42
 Not found: 3
 ```
+
+### Delete games not found
+```bash
+./egm deleteGamesNotFound /path/to/gamelist.xml
+```
+```
+Deleted games: 3
+```
