@@ -1,8 +1,6 @@
 name: Build ARMv7
 
-on:
-  release:
-    types: [created]
+on: [release]
 
 jobs:
   build:
@@ -27,7 +25,6 @@ jobs:
             npm test
 
       - name: Upload Linux ARMv7
-        if: steps.version-updated.outputs.has-updated
         uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
