@@ -2,7 +2,7 @@ name: Build ARMv7
 
 on:
   release:
-    created
+    types: [created]
 
 jobs:
   build:
